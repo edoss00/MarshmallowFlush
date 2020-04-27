@@ -8,7 +8,7 @@
   - Updates devlog, design doc, and README
 - **Amanda Chen**
 - **Lauren Pehlivanian**
-- **Kiran Vuksanaj
+- **Kiran Vuksanaj**
 
 ## Description
 Our project is a site that models changing COVID-19 data. The site will feature data comparisons between countries. It will also include an interactive simulation where the user can alter factors that affect the spread of the virus. 
@@ -46,7 +46,7 @@ To enter your virtual environment, run:
 
 ### Dependencies
 
-Install the required modules/libraries by running:
+Install the required modules/libraries by running the following in your virtual environment:
 
 ```shell
 pip install -r requirements.txt
@@ -54,7 +54,7 @@ pip install -r requirements.txt
 
 ### Run
 
-To run the program run the following line in your virtual environment:
+To run the program run the following in your virtual environment:
 
 ```shell
 python3 app.py
