@@ -5,7 +5,7 @@
 - **Elizabeth Doss** (PM):
   - Oversees project development
   - Help with frontend/backend development
-  - Updates devlog, design doc, and READ_ME
+  - Updates devlog, design doc, and README
 - **Amanda Chen**
 - **Lauren Pehlivanian**
 - **Kiran Vuksanaj
