@@ -1,4 +1,4 @@
-# PROJECT_NAME by MarshmallowFlush
+# Virographs by MarshmallowFlush
 
 ## Roster
 
@@ -11,7 +11,7 @@
 - **Kiran Vuksanaj**
 
 ## Description
-Our project is a site that models changing COVID-19 data. The site will feature data comparisons between countries. It will also include an interactive simulation where the user can alter factors that affect the spread of the virus. 
+Our project is a site that models changing COVID-19 data. Users will be able to compare trends of Coronavirus statistics between different countries and different US states. Users will also be able to see the effects of social distancing and quarantine on the spread of the virus.
 
 ## Datasets
 

@@ -1,2 +1,5 @@
 elizabethD -- 2020-04-24 09:13
 Added starter kit, linked submod, and created devlog
+
+elizabethD -- 2020-04-27 23:35
+Added design doc and API KB card
