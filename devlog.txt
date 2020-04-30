@@ -31,3 +31,6 @@ Timeline:
 changes to our plan of action. Everyone will be able to start coding today. Once data processing is
 handled we will be able to implement D3 and start frontend design. Our simulation is more isolated
 so it can be developed at its own pace.
+
+elizabethD -- 2020-04-30 15:04
+Added requirements and team flag
