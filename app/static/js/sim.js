@@ -3,4 +3,4 @@
 // 2020-04-29
 // Virus Spread Simulation
 
-
+console.log("sim.js connected");
