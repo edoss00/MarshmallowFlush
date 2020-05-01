@@ -6,3 +6,31 @@ Added design doc and API KB card
 
 elizabethD -- 2020-04-28 09:27
 Fixed repo structure and README
+
+MarshmallowFlush -- 2020-04-29 11:19
+Received input from The SIMPsons and Eclipse.
+
+The SIMPsons
+ - Lack of arrows on site map
+ - Consider using one database/file type for all sources
+ - Liked our diagrams/thorough descriptions
+
+Eclipse
+ - Issue with repo structure
+ - Lack of arrows on site map
+ - Lack of database table
+ - Elaborate the purpose of our API
+ - Our doc was very thorough and looked well thought out
+
+Design Doc Changes:
+  - Added arrows to site map
+  - Clarified use of API in site components
+
+Timeline:
+  - We requested to have the due date on May 11th, so we are on track and don't need to make major
+changes to our plan of action. Everyone will be able to start coding today. Once data processing is
+handled we will be able to implement D3 and start frontend design. Our simulation is more isolated
+so it can be developed at its own pace.
+
+elizabethD -- 2020-04-30 15:04
+Added requirements and team flag
