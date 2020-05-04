@@ -35,5 +35,17 @@ so it can be developed at its own pace.
 elizabethD -- 2020-04-30 15:04
 Added requirements and team flag
 
+laurenP -- 2020-05-01 08:18
+Added code in __init__.py to fetch data from 2 APIs. Downloaded csv file containing US case data by state.
+
 elizabethD -- 2020-05-03 20:18
 Created d3 branch and added starter line graph code
+
+laurenP -- 2020-05-04 00:12
+Added functions to parse data from the 2 APIs and adds each country’s daily case numbers together to get a total.
+
+kiranV -- 2020-05-04 08:16
+Built SVG framework in which the simulation will run. Wrote setup and “wiggle” functions for placing humans in the world and allowing them to move randomly around, in a way that can be complicated with future variables.
+
+laurenP -- 2020-05-04 09:00
+Wrote function to get the number of new cases and death by state for the most recent date. 
