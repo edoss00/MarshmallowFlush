@@ -20,6 +20,7 @@ svg.removeChild(sampleHuman);
 
 let id = 0;
 let setupComplete = false;
+let lastTimestamp = 0;
 
 let countHumans = 255;
 
@@ -27,15 +28,26 @@ let countHumans = 255;
 	// SIMULATION FUNCTIONS
 	// =========================
 
-const wiggle = function(human_elt){
-	
+const wiggle = function(human){
+	// console.log(human);
+	let d_heading = Math.random()*0.4 - 0.2;
+	let heading = parseInt(human.getAttribute('heading')) + d_heading;
+	let dx = Math.cos(heading) * 5;
+	let dy = Math.sin(heading) * 5;
+	let cx = parseInt(human.getAttribute('cx')) + dx;
+	let cy = parseInt(human.getAttribute('cy')) + dy;
+	human.setAttribute('cx',cx);
+	human.setAttribute('cy',cy);
+	human.setAttribute('heading',heading);
 }
 
 const step = function(timestamp) {
 	if(id){
 		console.log("new step");
-		let humans = svg.getElementsByClassName("circle");
-		for( human in humans ) wiggle(human);
+		for(let i = 0; i < countHumans; i++){
+			// console.log ( svg.children.item(i) );
+			wiggle(svg.children.item(i));
+		}
 		
 		id = window.requestAnimationFrame(step);
 	}else{
@@ -51,6 +63,7 @@ const setup = function(timestamp) {
 			human.removeAttribute('display');
 			human.setAttribute('cx',Math.random()*500);
 			human.setAttribute('cy',Math.random()*500);
+			human.setAttribute('heading',Math.random()*2*Math.PI);
 			svg.appendChild(human);
 		}
 		id = window.requestAnimationFrame(step);
@@ -58,6 +71,7 @@ const setup = function(timestamp) {
 	}else{
 		console.log("setup called without an active frame");
 	}
+	lastTimestamp = timestamp;
 }
 	// =========================
 	// EVENT LISTENER FUNCTIONS
