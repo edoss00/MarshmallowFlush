@@ -4,7 +4,7 @@ var graph = document.getElementById('showgraph');
 
 var display = function(e){
   var chart = {
-    const svg = d3.create("svg")
+    const svg = d3.select("#linegraph").append("svg")
         .attr("viewBox", [0, 0, width, height]);
 
     svg.append("g")
