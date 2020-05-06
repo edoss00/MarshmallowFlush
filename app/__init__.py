@@ -2,6 +2,7 @@
 from flask import Flask, render_template
 from datetime import datetime
 import urllib, json, csv
+from urllib.request import urlopen
 app = Flask(__name__) #create instance of class Flask
 
 #normal route
@@ -10,10 +11,10 @@ def home():
     #get_globalCases()
     #get_globalCountData()
     #get_StatesData()
-    return render_template( 'index.html', count = "URLLIB DOES NOT HAVE ATTRIBUTE URLOPEN get_globalCountData", world = "get_globalCases() doesn't work", states  = get_StatesData())
+    return render_template( 'index.html', count = get_globalCountData(), world = get_globalCases(), states  = get_StatesData())
 
 def maps():
-    return render_template( 'maps.html', world = "get_globalCases() doesn't work", states  = get_StatesData())
+    return render_template( 'maps.html', world = get_globalCases(), states  = get_StatesData())
 
 
 #fetch global confirmed/death/recovery data by date
@@ -21,7 +22,7 @@ def get_globalCases():
     global_cases = [] #array storing dicts {'date': 123123, 'confirmed', 'deaths', 'recovered'}
     #read from api
     url = "https://pomber.github.io/covid19/timeseries.json"
-    response = urllib.urlopen(url)
+    response = urlopen(url)
     data = json.loads(response.read())
 
     #global_cases = data["Afghanistan"]
@@ -49,7 +50,7 @@ def get_globalCases():
 #format: [[date,statename,newcases,newdeaths]]
 def get_globalCountData():
     url = "https://api.covid19api.com/summary"
-    response = urllib.urlopen(url)
+    response = urlopen(url)
     data = json.loads(response.read())
     # print(type(data))
     print(data["Global"])

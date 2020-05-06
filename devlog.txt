@@ -49,3 +49,6 @@ Built SVG framework in which the simulation will run. Wrote setup and â€œwiggleâ
 
 laurenP -- 2020-05-04 09:00
 Wrote function to get the number of new cases and death by state for the most recent date. 
+
+elizabethD -- 2020-05-06 00:28
+Tested and highlighted errors, connected flask to html pages
