@@ -1,14 +1,15 @@
 #prepares flask
 from flask import Flask, render_template
 from datetime import datetime
-import urllib, json, csv
+import json, csv
+import urllib.request as urllib
 app = Flask(__name__) #create instance of class Flask
 
 #normal route
 @app.route("/") #assign following fxn to run when root route requested
 def home():
     #get_globalCases()
-    #get_globalCountData()
+    get_globalCountData()
     #get_StatesData()
     return render_template( 'index.html', count = "URLLIB DOES NOT HAVE ATTRIBUTE URLOPEN get_globalCountData", world = "get_globalCases() doesn't work", states  = get_StatesData())
 
@@ -49,7 +50,8 @@ def get_globalCases():
 #format: [[date,statename,newcases,newdeaths]]
 def get_globalCountData():
     url = "https://api.covid19api.com/summary"
-    response = urllib.urlopen(url)
+    req = urllib.Request(url);
+    response = urllib.urlopen(req)
     data = json.loads(response.read())
     # print(type(data))
     print(data["Global"])
