@@ -22,7 +22,7 @@ let id = 0;
 let setupComplete = false;
 let lastTimestamp = 0;
 
-let countHumans = 255;
+let countHumans = 1;
 
 	// =========================
 	// SIMULATION FUNCTIONS
@@ -31,7 +31,7 @@ let countHumans = 255;
 const wiggle = function(human){
 	// console.log(human);
 	let d_heading = Math.random()*0.4 - 0.2;
-	let heading = parseInt(human.getAttribute('heading')) + d_heading;
+	let heading = parseFloat(human.getAttribute('heading')) + d_heading;
 	let dx = Math.cos(heading) * 5;
 	let dy = Math.sin(heading) * 5;
 	let cx = parseInt(human.getAttribute('cx')) + dx;
