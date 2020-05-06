@@ -1,17 +1,20 @@
 #prepares flask
-from flask import Flask
+from flask import Flask, render_template
 from datetime import datetime
 import urllib, json, csv
 app = Flask(__name__) #create instance of class Flask
 
 #normal route
 @app.route("/") #assign following fxn to run when root route requested
-def helloworld():
-    print(__name__) #prints in terminal
+def home():
     #get_globalCases()
     #get_globalCountData()
-    get_StatesData()
-    return "Hello, World." #prints on webpage
+    #get_StatesData()
+    return render_template( 'index.html', count = "URLLIB DOES NOT HAVE ATTRIBUTE URLOPEN get_globalCountData", world = "get_globalCases() doesn't work", states  = get_StatesData())
+
+def maps():
+    return render_template( 'maps.html', world = "get_globalCases() doesn't work", states  = get_StatesData())
+
 
 #fetch global confirmed/death/recovery data by date
 def get_globalCases():
