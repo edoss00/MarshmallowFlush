@@ -1,14 +1,12 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-</head>
-<body>
-  <p>
+{% extends "template.html" %}
+
+{% block header %}
+  <!-- <script src="http://d3js.org/d3.v5.min.js"></script> -->
+{% endblock %}
+
+{% block body %}
     There will be 2 graphs on this page using data from country data: {{ world }} and<br><br> states data: {{ states }}
-  </p>
+
   <div id="bubblemap"></div>
   <div id="worldmap"></div>
-  <script src="http://d3js.org/d3.v5.min.js"></script>
-</body>
-</html>
+{% endblock %}
