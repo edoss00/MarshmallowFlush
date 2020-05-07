@@ -11,12 +11,14 @@ def home():
     #get_globalCases()
     #get_globalCountData()
     #get_StatesData()
-    country = "all"
-    title = "Global"
     if "choosen_country" in request.args.keys():
         country = request.args["choosen_country"]
         title = request.args["choosen_country"]
+    else:
+        country = "All"
+        title = "Global"
     country_list = get_countries()
+    # print(country)
     # print(get_countryCase(country))
     return render_template( 'index.html', total = get_totalGlobalCases(), title = title, data = get_countryCase(country), countrylist = country_list)
 
@@ -34,7 +36,7 @@ def get_countries():
 #returns all the data by country requested
 def get_countryCase(c):
     world_data = get_globalCases()
-    if c == "all":
+    if c == "All":
         i = 1
         data = []
         # print(world_data[0])
