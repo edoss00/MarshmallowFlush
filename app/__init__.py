@@ -1,5 +1,5 @@
 #prepares flask
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from datetime import datetime
 import urllib, json, csv
 from urllib.request import urlopen
@@ -13,11 +13,23 @@ def home():
     #get_StatesData()
     country = "all"
     title = "Global"
-    print(get_countryCase(country))
-    return render_template( 'index.html', total = get_totalGlobalCases(), title = title, data = get_countryCase(country))
+    if "choosen_country" in request.args.keys():
+        country = request.args["choosen_country"]
+        title = request.args["choosen_country"]
+    country_list = get_countries()
+    # print(get_countryCase(country))
+    return render_template( 'index.html', total = get_totalGlobalCases(), title = title, data = get_countryCase(country), countrylist = country_list)
 
 def maps():
     return render_template( 'maps.html', world = get_globalCases(), states  = get_StatesData())
+
+#returns a list of all the countries
+def get_countries():
+    world_data = get_globalCases()
+    c = []
+    for country in world_data:
+        c.append(country[0])
+    return c
 
 #returns all the data by country requested
 def get_countryCase(c):
