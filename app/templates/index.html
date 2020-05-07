@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-</head>
-<body>
-  <h1>Global Count {{ count }}</h1>
-  <p>
-    There will be 1 graph on this page using data from country data: {{ world }} and<br><br> states data: {{ states }}
-  </p>
-  <div id="linegraph"></div>
-  <script src="http://d3js.org/d3.v5.min.js"></script>
-</body>
+  <head>
+    <meta charset="utf-8">
+  </head>
+  <body>
+    <h1>Confirmed Coronavirus Cases: {{ total }}</h1>
+    <p>
+      <!-- There will be 1 graph on this page using data from country data: {{ world }} and<br><br> states data: {{ states }} -->
+    </p>
+    <button id="showgraph"> Show Graph </button>
+    <div id="linegraph"></div>
+    <script src="http://d3js.org/d3.v5.min.js"></script>
+    <script type="text/javascript">
+      var graphdata = {{ data|tojson }}
+    </script>
+    <script src="{{ url_for('static', filename='js/linegraph.js')}}"></script>
+  </body>
 </html>
