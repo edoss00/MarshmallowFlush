@@ -13,6 +13,7 @@ def home():
     #get_StatesData()
     return render_template( 'index.html', count = get_globalCountData(), world = get_globalCases(), states  = get_StatesData())
 
+@app.route("/maps")
 def maps():
     return render_template( 'maps.html', world = get_globalCases(), states  = get_StatesData())
 
@@ -63,7 +64,7 @@ def get_StatesData():
     data = []
     today = datetime.today().strftime('%Y-%m-%d')
     print(today)
-    with open("data/us-states.csv") as csvfile:
+    with open("us-states.csv") as csvfile:
         csvdata = csv.reader(csvfile, delimiter=',')
         print(csvdata)
         #convert csvreader to array
