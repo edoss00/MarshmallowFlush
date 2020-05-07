@@ -1,14 +1,30 @@
 {% extends "template.html" %}
-
-{% block header %}
-  <script type="text/javascript" src="../static/js/linegraph.js"></script>
-{% endblock %}
-
-{% block body %}
-  <!-- <h1>Global Count {{ count }}</h1> -->
-  <p>
-    <!-- There will be 1 graph on this page using data from country data: {{ world }} and<br><br> states data: {{ states }} -->
-  </p>
-    <button type="button" id="showgraph">Show graph!</button>
+  {% block header %}
+  {% endblock %}
+  {% block body %}
+    <h1>Confirmed Coronavirus Cases: {{ total }}</h1>
+    <p>
+      <!-- There will be 1 graph on this page using data from country data: {{ world }} and<br><br> states data: {{ states }} -->
+    </p>
+    <h2>{{ title }}</h2>
+    <!-- <button id="showgraph"> Show Graph </button> -->
     <div id="linegraph"></div>
-{% endblock %}
+    <button id="confirmed"> Confirmed </button>
+    <button id="deaths"> Deaths </button>
+    <button id="recovered"> Recovered </button>
+    <br><br>
+    <form method="get" action={{ url_for('home') }}>
+      <select id="country" name="choosen_country">
+          <option value="All">All</option>
+        {% for country in countrylist %}
+          <option value="{{ country }}">{{ country }}</option>
+        {% endfor %}
+      </select>
+      <input type="submit" value="Submit">
+    </form>
+    <script src="http://d3js.org/d3.v5.min.js"></script>
+    <script type="text/javascript">
+      var graphdata = {{ data|tojson }}
+    </script>
+    <script src="{{ url_for('static', filename='js/linegraph.js')}}"></script>
+  {% endblock %}
