@@ -54,25 +54,60 @@ const worldWrap = function(human){
 	human.setAttribute('cy',cy);
 }
 
+const infect = function(human){
+	human.setAttribute("infectedNext",'yes');
+	human.setAttribute("fill","red");
+}
+const disinfect = function(human){
+	human.setAttribute("infectedNext",'no');
+	human.removeAttribute("fill");
+}
+
+const closeTo = function(a,b){
+	let ax,ay,bx,by;
+	ax = parseFloat(a.getAttribute('cx'));
+	ay = parseFloat(a.getAttribute('cy'));
+	bx = parseFloat(b.getAttribute('cx'));
+	by = parseFloat(b.getAttribute('cy'));
+	let out = Math.abs(ax-bx) < 15 && Math.abs(ay-by) < 15;
+	return out;
+}
+
 const infectNeighbors = function(human){
-	// for z
+	// console.log(svg.children)
+	// console.log(svg.children[0]);
+	// console.log(human);
+	for(let i=0;i<countHumans;i++){
+		if( closeTo( svg.children[i], human ) && Math.random() < 0.2
+		  ){
+			infect(svg.children[i]);
+		}
+	}
 }
 const go = function(human){
 	wiggle(human);
 	worldWrap(human);
-	if(human.hasAttribute('infected')){
+	if(human.getAttribute('infected')=='yes'){
 		infectNeighbors(human);
 	}
 }
 
+const update = function(human) {
+	if ( human.hasAttribute('infectedNext') ){
+		human.setAttribute('infected', human.getAttribute('infectedNext') );
+		human.removeAttribute('infectedNext');
+	}
+}
+
+const dontstep = function(timestamp) {}
 const step = function(timestamp) {
 	if(id){
 		console.log("new step");
 		for(let i = 0; i < countHumans; i++){
 			// console.log ( svg.children.item(i) );
 			go(svg.children.item(i));
+			update(svg.children.item(i));
 		}
-		
 		id = window.requestAnimationFrame(step);
 	}else{
 		console.log("step called without an active frame?");
@@ -82,12 +117,20 @@ const step = function(timestamp) {
 const setup = function(timestamp) {
 	if(id){
 		console.log("setting up");
+		// randomly place and give headings
 		for(let i = 0; i < countHumans; i++){
 			let human = sampleHuman.cloneNode();
 			human.removeAttribute('display');
 			human.setAttribute('cx',Math.random()*500);
 			human.setAttribute('cy',Math.random()*500);
 			human.setAttribute('heading',Math.random()*2*Math.PI);
+			human.setAttribute('class','human');
+			human.setAttribute('infected','no');
+			human.setAttribute('id','human-'+i);
+			if ( i == 0 ){ // one human starts out having the disease
+				human.setAttribute('infected','yes');
+				human.setAttribute('fill','red');
+			}
 			svg.appendChild(human);
 		}
 		id = window.requestAnimationFrame(step);
