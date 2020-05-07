@@ -54,9 +54,15 @@ const worldWrap = function(human){
 	human.setAttribute('cy',cy);
 }
 
+const infectNeighbors = function(human){
+	// for z
+}
 const go = function(human){
 	wiggle(human);
 	worldWrap(human);
+	if(human.hasAttribute('infected')){
+		infectNeighbors(human);
+	}
 }
 
 const step = function(timestamp) {
