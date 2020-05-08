@@ -7,6 +7,8 @@
       <!-- There will be 1 graph on this page using data from country data: {{ world }} and<br><br> states data: {{ states }} -->
     </p>
     <h2>{{ title }}</h2>
+    <br>
+    <div id="counter"></div>
     <!-- <button id="showgraph"> Show Graph </button> -->
     <div id="linegraph"></div>
     <button id="confirmed"> Confirmed </button>
@@ -27,4 +29,5 @@
       var graphdata = {{ data|tojson }}
     </script>
     <script src="{{ url_for('static', filename='js/linegraph.js')}}"></script>
+    <script id="counter-script" type="text/javascript" src="../static/js/counter.js" count="{{total}}">  </script>
   {% endblock %}
