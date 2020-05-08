@@ -44,11 +44,26 @@ Created d3 branch and added starter line graph code
 laurenP -- 2020-05-04 00:12
 Added functions to parse data from the 2 APIs and adds each country’s daily case numbers together to get a total.
 
+amandaC -- 2020-05-04 21:35
+Added basic code for line graph and maps. Edited code to fit our data.
+
 kiranV -- 2020-05-04 08:16
 Built SVG framework in which the simulation will run. Wrote setup and “wiggle” functions for placing humans in the world and allowing them to move randomly around, in a way that can be complicated with future variables.
 
 laurenP -- 2020-05-04 09:00
-Wrote function to get the number of new cases and death by state for the most recent date. 
+Wrote function to get the number of new cases and death by state for the most recent date.
+
+amandaC -- 2020-05-05 22:56
+Finished code for line graph. Added buttons to test if the line graph works. Line graph can now transition between confirmed, deaths, and recovered.
 
 elizabethD -- 2020-05-06 00:28
 Tested and highlighted errors, connected flask to html pages
+
+amandaC -- 2020-05-06 23:54
+Connected line graph javascript to html and flask app. Added new functions to count global cases, country data, and country list. Changed homepage to show total coronavirus cases. Added function to change countries for line graph.
+
+amandaC - -2020-05-07 00:30:58
+Fixed small bug when loading line graph data from all countries
+
+kiranV -- 2020-05-07 07:36
+Built ‘infection’ aspect of simulation so that infection spreads from human to human. So far unoptimized but successfully selecting ‘neighbor’ humans; experimented with values to find reasonable default spread speed.
