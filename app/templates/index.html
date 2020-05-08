@@ -2,14 +2,15 @@
   {% block header %}
   {% endblock %}
   {% block body %}
-    <h1>Confirmed Coronavirus Cases: {{ total }}</h1>
+    <!-- <h1>Confirmed Coronavirus Cases: {{ total }}</h1> -->
     <p>
       <!-- There will be 1 graph on this page using data from country data: {{ world }} and<br><br> states data: {{ states }} -->
     </p>
-    <h2>{{ title }}</h2>
-    <br>
     <div id="counter"></div>
     <!-- <button id="showgraph"> Show Graph </button> -->
+    <br>
+    <br>
+    <h2 style="text-align: center">{{ title }} Data</h2>
     <div id="linegraph"></div>
     <button id="confirmed"> Confirmed </button>
     <button id="deaths"> Deaths </button>
