@@ -30,12 +30,12 @@ count_text.style.fontSize = "300%";
 var timer = 0;
 
 const count_up = function() {
-  console.log(cur, parseInt(total));
+  //console.log(cur, parseInt(total));
   count_text.innerHTML = cur;
   cur += add;
   timer += 10;
   if (cur >= total) {
-      console.log("done");
+      console.log("counter done");
       clearInterval(step);
       count_text.innerHTML = total;
   }
