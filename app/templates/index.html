@@ -1,5 +1,8 @@
 {% extends "template.html" %}
   {% block header %}
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
   {% endblock %}
   {% block body %}
     <!-- <h1>Confirmed Coronavirus Cases: {{ total }}</h1> -->
@@ -10,25 +13,45 @@
     <!-- <button id="showgraph"> Show Graph </button> -->
     <br>
     <br>
-    <h2 style="text-align: center">{{ title }} Data</h2>
-    <div id="linegraph"></div>
-    <button id="confirmed"> Confirmed </button>
-    <button id="deaths"> Deaths </button>
-    <button id="recovered"> Recovered </button>
-    <br><br>
-    <form method="get" action={{ url_for('home') }}>
-      <select id="country" name="choosen_country">
-          <option value="All">All</option>
-        {% for country in countrylist %}
-          <option value="{{ country }}">{{ country }}</option>
-        {% endfor %}
-      </select>
-      <input type="submit" value="Submit">
-    </form>
+    <div id="container">
+      <div id="control">
+        <!-- <button id="confirmed" class="btn btn-lg btn-primary"> Confirmed </button>
+        <button id="deaths" class="btn btn-lg btn-primary"> Deaths </button>
+        <button id="recovered" class="btn btn-lg btn-primary"> Recovered </button> -->
+        <br>
+        <br>
+        <h5>Choose Country:</h5>
+        <form method="get" action={{ url_for('home') }}>
+          <select id="country" name="choosen_country">
+              <option value="All">All</option>
+            {% for country in countrylist %}
+              <option value="{{ country }}">{{ country }}</option>
+            {% endfor %}
+          </select>
+          <input type="submit" value="Display">
+        </form>
+        <br>
+        <div id="toggle-data" class="btn-group btn-group-toggle" data-toggle="buttons">
+          <label id="confirmed" class="btn btn-secondary active" >
+            <input type="radio" name="options" autocomplete="off" checked> Confirmed
+          </label>
+          <label id="deaths" class="btn btn-secondary" >
+            <input type="radio" name="options" autocomplete="off"> Deaths
+          </label>
+          <label id="recovered" class="btn btn-secondary">
+            <input type="radio"  name="options" autocomplete="off"> Recovered
+          </label>
+        </div>
+      </div>
+          <h2 style="text-align: center">{{ title }} Data</h2>
+      <div id="linegraph"></div>
+    </div>
+
     <script src="http://d3js.org/d3.v5.min.js"></script>
     <script type="text/javascript">
       var graphdata = {{ data|tojson }}
     </script>
     <script src="{{ url_for('static', filename='js/linegraph.js')}}"></script>
     <script id="counter-script" type="text/javascript" src="../static/js/counter.js" count="{{total}}">  </script>
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
   {% endblock %}
