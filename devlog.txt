@@ -67,3 +67,10 @@ Fixed small bug when loading line graph data from all countries
 
 kiranV -- 2020-05-07 07:36
 Built ‘infection’ aspect of simulation so that infection spreads from human to human. So far unoptimized but successfully selecting ‘neighbor’ humans; experimented with values to find reasonable default spread speed.
+
+elizabethD -- 2020-05-10 13:55
+Fixed launch instructions, updated design doc
+
+Design Doc Updates:
+- Removed coronainfo page from site map
+- Updated capabilities of line graph and simulation
