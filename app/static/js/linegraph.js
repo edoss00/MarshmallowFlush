@@ -106,8 +106,9 @@ svg.selectAll(".dot")
 // }
 
 var transition = function(e){
-  // console.log(e)
+   console.log(e)
   if(e == 'confirmed'){
+    console.log("conf");
     data = graphdata.map(({date, confirmed, deaths, recovered}) => ({date, value: confirmed}));
   }
   if(e == 'deaths'){
@@ -160,6 +161,7 @@ var transition = function(e){
     .attr("r", 1)
     .attr("fill", "steelblue");
 }
+
 
 // graphbtn.addEventListener('click', display);
 confirmedbtn.addEventListener('click', function(){ transition('confirmed') });
