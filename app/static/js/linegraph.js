@@ -143,7 +143,7 @@ var transition = function(e){
       .duration(3000)
       .attr("fill", "none")
       .attr("class", "line")
-      .attr("stroke", "steelblue")
+      .attr("stroke", "#8E8D8A")
       .attr("stroke-width", 1.5)
       .attr("stroke-linejoin", "round")
       .attr("stroke-linecap", "round")
@@ -161,7 +161,7 @@ var transition = function(e){
     .attr("cx", function(d) { return x(d.date) })
     .attr("cy", function(d) { return y(d.value) })
     .attr("r", 1)
-    .attr("fill", "steelblue");
+    .attr("fill", "#8E8D8A");
 }
 
 
