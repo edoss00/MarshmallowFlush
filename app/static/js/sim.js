@@ -20,13 +20,13 @@ svg.removeChild(sampleHuman);
 
 let id = 0;
 let setupComplete = false;
-let lastTimestamp = 0;
+let frame = 0;
 
 let humans = [];
 let infecteds = [];
 let uninfecteds = [];
 
-let countHumans = 255;
+let countHumans = 50;
 let speed = 2.5;
 
 // =========================
@@ -78,6 +78,19 @@ const closeTo = function(a,b){
 	return out;
 }
 
+const inVision = function(a,b){
+	let ax,ay,bx,by,a_heading;
+	ax = parseFloat(a.getAttribute('cx'));
+	ay = parseFloat(a.getAttribute('cy'));
+	bx = parseFloat(b.getAttribute('cx'));
+	by = parseFloat(b.getAttribute('cy'));
+	a_heading = parseFloat(a.getAttribute('heading'));
+	let theta = Math.atan((by-ay)/(bx-ax))
+	if(bx < ax) theta += Math.PI;
+	let r = Math.sqrt((by-ay)*(by-ay) + (bx-ax)*(bx-ax));
+	return Math.abs( (a_heading - theta) % (2*Math.PI) ) < Math.PI/4 && r < 20;
+}
+
 const infectNeighbors = function(human){
 	// console.log(svg.children)
 	// console.log(svg.children[0]);
@@ -89,12 +102,19 @@ const infectNeighbors = function(human){
 		}
 	}
 }
+const avoidNeighbors = function(human){
+	if( humans.some( neighbor => inVision(human,neighbor) ) ){
+		human.setAttribute( 'heading',parseFloat(human.getAttribute('heading'))+ Math.PI );
+	}
+}
+
 const go = function(human){
 	wiggle(human);
 	worldWrap(human);
 	if(human.getAttribute('infected')=='yes'){
 		infectNeighbors(human);
 	}
+	avoidNeighbors(human);
 }
 
 const update = function(human) {
