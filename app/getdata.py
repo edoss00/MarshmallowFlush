@@ -107,7 +107,7 @@ def get_StatesData():
         yesterday = data[-56][0]
         #how many states/territories are included for this date (for indexing)
         rows = int(data[-1][2])
-        print(date, yesterday)
+        # print(date, yesterday)
         out.append(date)
 
         #print(data[100])
@@ -116,8 +116,55 @@ def get_StatesData():
             if data[idx][0] == date:
                 #print(int(data[idx-rows+1][3]))
                 #subtract todays data from yesterday's to get # new cases/deaths
-                temp = [date, data[idx][1], int(data[idx][3]) - int(data[idx-rows+1][3]), int(data[idx][4]) - int(data[idx-rows+1][4]) ]
+                temp = [date, data[idx][1], data[idx][2], int(data[idx][3]) - int(data[idx-rows+1][3]), int(data[idx][4]) - int(data[idx-rows+1][4]) ]
                 out.append(temp)
 
     #print(out)
     return out
+
+# print(get_StatesData())
+
+def get_CountiesData():
+    out = [] #array of arrays
+    data = []
+    today = datetime.today().strftime('%Y-%m-%d')
+    # print(today)
+    with open("data/us-counties.csv") as csvfile:
+        csvdata = csv.reader(csvfile, delimiter=',')
+        # print(csvdata)
+        #convert csvreader to array
+        for row in csvdata:
+            data.append(row)
+        #most recent date = the one at the bottom
+        date = data[-1][0]
+        yesterday = data[-2908][0]
+        #how many states/territories are included for this date (for indexing)
+        rows = 2908
+        # print(date, yesterday)
+        out.append(date)
+
+        #print(data[100])
+        #go through data finding rows that match the date
+        for idx in range(len(data)):
+            if data[idx][0] == date:
+                #print(int(data[idx-rows+1][3]))
+                #subtract todays data from yesterday's to get # new cases/deaths
+                temp = [date, data[idx][1], data[idx][2], data[idx][3], int(data[idx][4]) - int(data[idx-rows+1][4]), int(data[idx][5]) - int(data[idx-rows+1][5]) ]
+                out.append(temp)
+
+    #print(out)
+    return out
+
+print(get_CountiesData())
+
+def get_statesjson():
+    with open("static/json/states-albers-10m.json") as jsonfile:
+        data = json.loads(jsonfile.read())
+        return data
+
+def get_countiesjson():
+    with open("static/json/counties-albers-10m.json") as jsonfile:
+        data = json.loads(jsonfile.read())
+        return data
+
+# get_statesjson()

@@ -5,8 +5,15 @@
 {% endblock %}
 
 {% block body %}
-    There will be 2 graphs on this page using data from country data: {{ world }} and<br><br> states data: {{ states }}
 
-  <div id="bubblemap"></div>
+  <!-- <button id="state">Show Bubble</button> -->
+  <h1>New Deaths in the US</h1>
+  <div id="statemap"></div>
   <div id="worldmap"></div>
+  <script src="https://unpkg.com/topojson-client@3"></script>
+  <script type="text/javascript">
+    var graphdata = {{ counties|tojson }}
+    var us = {{ countyjson|tojson }}
+  </script>
+  <script src="{{ url_for('static', filename='js/maps.js')}}"></script>
 {% endblock %}

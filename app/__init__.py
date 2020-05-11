@@ -26,7 +26,9 @@ def home():
 
 @app.route("/maps")
 def maps():
-    return render_template( 'maps.html', world = gd.get_globalCases(), states  = gd.get_StatesData())
+    return render_template( 'maps.html', world = gd.get_globalCases(),
+                                         states  = gd.get_StatesData(), statejson = gd.get_statesjson(),
+                                         counties = gd.get_CountiesData(), countyjson = gd.get_countiesjson())
 
 
 
