@@ -28,6 +28,10 @@ let uninfecteds = [];
 
 let countHumans = 50;
 let speed = 2.5;
+let percentDistancing = 0.8;
+let initCases = 1;
+let symptomDelay = 40;
+let distancingStart = 0;
 
 // =========================
 	// SIMULATION FUNCTIONS
@@ -60,12 +64,10 @@ const worldWrap = function(human){
 }
 
 const infect = function(human){
-	human.setAttribute("infectedNext",'yes');
-	human.setAttribute("fill","red");
-}
-const disinfect = function(human){
-	human.setAttribute("infectedNext",'no');
-	human.removeAttribute("fill");
+
+	if(human.getAttribute('infected')=='no'){
+		human.setAttribute("infectedNext",'yes');
+	}
 }
 
 const closeTo = function(a,b){
@@ -109,25 +111,39 @@ const avoidNeighbors = function(human){
 }
 
 const go = function(human){
-	wiggle(human);
-	worldWrap(human);
-	if(human.getAttribute('infected')=='yes'){
-		infectNeighbors(human);
+	if(human.getAttribute('removed')=='no'){
+		wiggle(human);
+		worldWrap(human);
+		if(human.getAttribute('infected')=='yes'){
+			infectNeighbors(human);
+		}
+		if(human.getAttribute('distancing')=='yes' && infecteds.count > distancingStart){
+			avoidNeighbors(human);
+		}
 	}
-	avoidNeighbors(human);
 }
 
 const update = function(human) {
 	if ( human.hasAttribute('infectedNext') ){
-		human.setAttribute('infected', human.getAttribute('infectedNext') );
+		human.setAttribute('infected','yes' );
+		human.setAttribute('infect-date',frame);
+		human.setAttribute('fill','yellow');
 		human.removeAttribute('infectedNext');
+	}
+	if ( human.getAttribute('fill') == 'yellow' && parseInt(human.getAttribute('infect-date'))+symptomDelay < frame ){
+		human.setAttribute('fill','red');
+	}
+	if ( human.getAttribute('fill') == 'red' && Math.random() < 0.005 ){
+		human.setAttribute('removed','yes');
+		human.setAttribute('infected','NA');
+		human.setAttribute('opacity',0);
 	}
 }
 
 const dontstep = function(timestamp) {}
 const step = function(timestamp) {
 	if(id){
-		console.log("new step");
+		console.log('new step');
 		for(let i = 0; i < countHumans; i++){
 			// console.log ( svg.children.item(i) );
 			go(svg.children.item(i));
@@ -137,6 +153,7 @@ const step = function(timestamp) {
 		}
 		infected = humans.filter(human=>human.getAttribute('infected')=='yes');
 		uninfected = humans.filter(human => human.getAttribute('infected')=='no');
+		frame++;
 		id = window.requestAnimationFrame(step);
 	}else{
 		console.log("step called without an active frame?");
@@ -155,8 +172,15 @@ const setup = function(timestamp) {
 			human.setAttribute('heading',Math.random()*2*Math.PI);
 			human.setAttribute('class','human');
 			human.setAttribute('infected','no');
+			human.setAttribute('removed','no');
 			human.setAttribute('id','human-'+i);
-			if ( i == 0 ){ // one human starts out having the disease
+			if ( Math.random() < percentDistancing ){
+				human.setAttribute('distancing','yes');
+				human.setAttribute('stroke','blue');
+			}else{
+				human.setAttribute('distancing','no');
+			}
+			if ( i < initCases ){ // one human starts out having the disease
 				human.setAttribute('infected','yes');
 				human.setAttribute('fill','red');
 				infecteds.push( human );
