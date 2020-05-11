@@ -25,7 +25,7 @@ var recoveredbtn = document.getElementById('recovered');
   // //   .map(({date, close}) => ({date, value: close})), {y: "$ Close"})
   console.log(data)
 
-var margin = {top: 50, right: 50, bottom: 50, left: 100}
+var margin = {top: 20, right: 20, bottom: 20, left: 40}
   , width = window.innerWidth - margin.left - margin.right-20 // Use the window's width
   , height = window.innerHeight - margin.top - margin.bottom - 150; // Use the window's height - int to accomodate header
 
@@ -119,12 +119,40 @@ var transition = function(e){
   if(e == 'recovered'){
     data = graphdata.map(({date, confirmed, deaths, recovered}) => ({date, value: recovered}));
   }
+  
+  setTimeout(() => {
+    y.domain([0, d3.max(data, d => d.value)]).nice()
+    svg.select(".yaxis")
+        .transition()
+        .duration(3000)
+        .call(d3.axisLeft(y))
 
-  y.domain([0, d3.max(data, d => d.value)]).nice()
-  svg.select(".yaxis")
+    u
+      .enter().append("path")
+        .datum(data)
+        .attr("class", "line")
+        .merge(u)
+        .transition()
+        .duration(3000)
+        .attr("fill", "none")
+        .attr("class", "line")
+        .attr("stroke", "#8E8D8A")
+        .attr("stroke-width", 1.5)
+        .attr("stroke-linejoin", "round")
+        .attr("stroke-linecap", "round")
+        .attr("d", line);
+
+    v
+      .enter().append("circle")
+      .attr("class", "dot")
+      .merge(v)
       .transition()
       .duration(3000)
-      .call(d3.axisLeft(y))
+      .attr("cx", function(d) { return x(d.date) })
+      .attr("cy", function(d) { return y(d.value) })
+      .attr("r", 1)
+      .attr("fill", "#8E8D8A");
+  }, 3000);
 
   line = d3.line()
       .defined(d => !isNaN(d.value))
@@ -162,6 +190,7 @@ var transition = function(e){
     .attr("cy", function(d) { return y(d.value) })
     .attr("r", 1)
     .attr("fill", "#8E8D8A");
+
 }
 
 
