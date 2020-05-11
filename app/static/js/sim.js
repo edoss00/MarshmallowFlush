@@ -13,6 +13,8 @@ console.log("sim.js connected");
 const startButton = document.getElementById("start-button");
 const svg = document.getElementById("sim-svg");
 const sampleHuman = document.getElementById("sample-human");
+const fields = document.getElementsByClassName('form-control');
+
 svg.removeChild(sampleHuman);
 	// =========================
 	// GLOBAL VARIABLES
@@ -32,6 +34,15 @@ let percentDistancing = 0.8;
 let initCases = 1;
 let symptomDelay = 40;
 let distancingStart = 0;
+let spreadChance = 0.2;
+
+let liveVals = {
+	'pop':'50',
+	'init':'1',
+	'threshold':'15',
+	'pdist':'80',
+	'spread':'20'
+};
 
 // =========================
 	// SIMULATION FUNCTIONS
@@ -163,6 +174,14 @@ const step = function(timestamp) {
 const setup = function(timestamp) {
 	if(id){
 		console.log("setting up");
+		// read values from fields
+		countHumans = parseInt(liveVals['pop'])
+		percentDistancing = parseFloat(liveVals['pdist']) / 100.0;
+		initCases = parseInt(liveVals['init']);
+		distancingStart = parseInt(liveVals['threshold']);
+		spreadChange = parseFloat(liveVals['spread']) / 100.0;
+		Array.from(fields).forEach( field => field.setAttribute('disabled','true') );
+		
 		// randomly place and give headings
 		for(let i = 0; i < countHumans; i++){
 			let human = sampleHuman.cloneNode();
@@ -215,9 +234,20 @@ const start_stop = function(e) {
 	}
 }
 
+const updatevalue = function(e) {
+	e.preventDefault();
+	// console.log(e.target);
+	// console.log(e.target.value);
+	// console.log(e.target.name);
+	liveVals[e.target.name] = e.target.value;
+}
+
 	// =========================
 	// ATTACH EVENT LISTENERS
 	// =========================
 
 
 startButton.addEventListener('click',start_stop);
+Array.from(fields).forEach(field => {
+	field.addEventListener('input',updatevalue);
+});
