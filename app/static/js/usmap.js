@@ -1,5 +1,4 @@
 // bubble map - https://observablehq.com/@d3/bubble-map
-// heat map - https://observablehq.com/@d3/world-choropleth
 
 // var world = document.getElementById('worldmap');
 // var state = document.getElementById('state');
