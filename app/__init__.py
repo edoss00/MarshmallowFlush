@@ -24,12 +24,16 @@ def home():
     # print(get_countryCase(country))
     return render_template( 'index.html', total = gd.get_totalGlobalCases(), title = title, data = gd.get_countryCase(country), countrylist = country_list)
 
-@app.route("/maps")
-def maps():
-    return render_template( 'maps.html', world = gd.get_newCountryCases(), worldjson = gd.get_worldjson(),
+@app.route("/usmap")
+def usmap():
+    return render_template( 'maps.html', title="New Deaths in the US",
                                          states  = gd.get_StatesData(), statejson = gd.get_statesjson(),
                                          counties = gd.get_CountiesData(), countyjson = gd.get_countiesjson())
 
+@app.route("/worldmap")
+def worldmap():
+    return render_template( 'maps.html', title="New Deaths in the World",
+                                        world = gd.get_newCountryCases(), worldjson = gd.get_worldjson())
 
 
 @app.route("/simulation")
