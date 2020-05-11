@@ -107,3 +107,11 @@ Fixed scale of world map so colors are more distinguishable. Added margins to mo
 
 kiranV -- 2020-05-11 06:40
 Fixed issues with “social distancing” aspect of simulation. Created HTML form to adjust variables from front end, and linked to existing global variables. Added explanatory text to HTML template.
+
+elizabethD -- 2020-05-11 07:58
+Updated design doc
+
+Design Doc Updates:
+- Split maps page of site map
+- Updated descriptions of simulation and maps
+- Updated site map html components
