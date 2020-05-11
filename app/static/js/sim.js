@@ -22,9 +22,14 @@ let id = 0;
 let setupComplete = false;
 let lastTimestamp = 0;
 
+let humans = [];
+let infecteds = [];
+let uninfecteds = [];
+
 let countHumans = 255;
 let speed = 2.5;
-	// =========================
+
+// =========================
 	// SIMULATION FUNCTIONS
 	// =========================
 
@@ -77,10 +82,10 @@ const infectNeighbors = function(human){
 	// console.log(svg.children)
 	// console.log(svg.children[0]);
 	// console.log(human);
-	for(let i=0;i<countHumans;i++){
-		if( closeTo( svg.children[i], human ) && Math.random() < 0.2
+	for(let i=0;i<uninfecteds.length;i++){
+		if( closeTo( uninfecteds[i], human ) && Math.random() < 0.2
 		  ){
-			infect(svg.children[i]);
+			infect(uninfecteds[i]);
 		}
 	}
 }
@@ -106,8 +111,12 @@ const step = function(timestamp) {
 		for(let i = 0; i < countHumans; i++){
 			// console.log ( svg.children.item(i) );
 			go(svg.children.item(i));
+		}
+		for(let i = 0; i < countHumans; i++){
 			update(svg.children.item(i));
 		}
+		infected = humans.filter(human=>human.getAttribute('infected')=='yes');
+		uninfected = humans.filter(human => human.getAttribute('infected')=='no');
 		id = window.requestAnimationFrame(step);
 	}else{
 		console.log("step called without an active frame?");
@@ -130,7 +139,11 @@ const setup = function(timestamp) {
 			if ( i == 0 ){ // one human starts out having the disease
 				human.setAttribute('infected','yes');
 				human.setAttribute('fill','red');
+				infecteds.push( human );
+			} else {
+				uninfecteds.push( human );
 			}
+			humans.push( human );
 			svg.appendChild(human);
 		}
 		id = window.requestAnimationFrame(step);
