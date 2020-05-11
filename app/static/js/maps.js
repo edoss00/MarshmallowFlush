@@ -6,27 +6,60 @@
 
 
 // console.log(stategraphdata)
-var data = new Map(stategraphdata.slice(1).map(([date, county, state, fips, deaths, recovered]) => [fips, +deaths]))
 // console.log([...data.values()])
 // console.log(data)
 
+// function zoomed() {
+//   const {transform} = d3.event;
+//   g.attr("transform", transform);
+//   g.attr("stroke-width", 1 / transform.k);
+// }
+//
+// const zoom = d3.zoom()
+//     .scaleExtent([1, 8])
+//     .on("zoom", zoomed);
+//
+// function clicked(d) {
+//   const [[x0, y0], [x1, y1]] = path.bounds(d);
+//   d3.event.stopPropagation();
+//   svg.transition().duration(750).call(
+//     zoom.transform,
+//     d3.zoomIdentity
+//       .translate(width / 2, height / 2)
+//       .scale(Math.min(8, 0.9 / Math.max((x1 - x0) / width, (y1 - y0) / height)))
+//       .translate(-(x0 + x1) / 2, -(y0 + y1) / 2),
+//     d3.mouse(svg.node())
+//   );
+// }
+//
+// function reset() {
+//   svg.transition().duration(750).call(
+//     zoom.transform,
+//     d3.zoomIdentity,
+//     d3.zoomTransform(svg.node()).invert([width / 2, height / 2])
+//   );
+// }
+
 ///////////// STATE MAP ///////////////////////
+var data = new Map(stategraphdata.slice(1).map(([date, county, state, fips, deaths, recovered]) => [fips, +deaths]))
+
 var radius = d3.scaleSqrt()
     .domain([0, d3.max([...data.values()])])
     .range([0,50])
 // console.log(d3.max([...data.values()]))
 // [0, d3.quantile([...data.values()].sort(d3.ascending), 0.985)], [0, 15]
-console.log(radius)
+// console.log(radius)
 var path = d3.geoPath()
 var format = d3.format(",.0f")
 // console.log(us)
 
 var svg = d3.select("#statemap").append("svg")
-    .attr("viewBox", [-50, -50, 1100, 750]);
+    .attr("viewBox", [-50, -50, 1100, 750])
+    // .on("click", reset);
 
 svg.append("path")
     .datum(topojson.feature(us, us.objects.nation))
-    .attr("fill", "gray")
+    .attr("fill", "#ccc")
     .attr("d", path);
 
 svg.append("path")
@@ -62,16 +95,20 @@ svg.append("g")
     .attr("fill-opacity", 0.5)
     .attr("stroke", "#fff")
     .attr("stroke-width", 0.5)
+    // .attr("cursor", "pointer")
   .selectAll("circle")
   .data(topojson.feature(us, us.objects.counties).features
       .map(d => (d.value = data.get(d.id), d))
       .sort((a, b) => b.value - a.value))
   .join("circle")
+    // .on("click", clicked)
     .attr("transform", d => `translate(${path.centroid(d)})`)
     .attr("r", d => radius(d.value))
   .append("title")
     .text(d => `${d.properties.name}
   ${format(d.value)}`);
+
+// svg.call(zoom);
 
 ///////////// WORLD MAP ///////////////////////
 // console.log(worldgraphdata)
@@ -107,20 +144,21 @@ var svg2 = d3.select("#worldmap").append("svg")
 
 var defs = svg2.append("defs");
 
-var color = d3.scaleSequential()
+var color = d3.scaleSequentialSqrt()
     .domain(d3.extent(Array.from(data2.values())))
-    .interpolator(d3.interpolateYlOrBr)
-    .unknown("#ccc")
-console.log(data2.keys())
+    // .range(["#ffffe5","fee391","#662506"])
+    .interpolator(d3.interpolateReds)
+    .unknown("#ccc");
+// console.log(data2.keys())
 
 var projection = d3.geoEqualEarth()
-path = d3.geoPath(projection)
+var path2 = d3.geoPath(projection)
 var outline = ({type: "Sphere"})
 var countries = topojson.feature(world, world.objects.countries)
 
 defs.append("path")
     .attr("id", "outline")
-    .attr("d", path(outline));
+    .attr("d", path2(outline));
 
 defs.append("clipPath")
     .attr("id", "clip")
@@ -139,7 +177,7 @@ g.append("g")
   .data(countries.features)
   .join("path")
     .attr("fill", d => color(data2.get(d.properties.name)))
-    .attr("d", path)
+    .attr("d", path2)
   .append("title")
     .text(d => `${d.properties.name}
 ${data2.has(d.properties.name) ? data2.get(d.properties.name) : "N/A"}`);
@@ -149,7 +187,7 @@ g.append("path")
     .attr("fill", "none")
     .attr("stroke", "#ccc")
     .attr("stroke-linejoin", "round")
-    .attr("d", path);
+    .attr("d", path2);
 
 svg2.append("use")
     .attr("xlink:href", new URL("#outline", location))
