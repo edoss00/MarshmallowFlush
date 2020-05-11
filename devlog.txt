@@ -17,7 +17,7 @@ The SIMPsons
 
 Eclipse
  - Issue with repo structure
- - Lack of arrows on site map
+nnn - Lack of arrows on site map
  - Lack of database table
  - Elaborate the purpose of our API
  - Our doc was very thorough and looked well thought out
@@ -104,3 +104,6 @@ Separated world and US map to 2 different paths, adjusted javascript and html fi
 
 amandaC -- 2020-05-11 00:44
 Fixed scale of world map so colors are more distinguishable. Added margins to most elements. Added a legend to the world map. Alphabetized dropdown menu on home page.
+
+kiranV -- 2020-05-11 06:40
+Fixed issues with “social distancing” aspect of simulation. Created HTML form to adjust variables from front end, and linked to existing global variables. Added explanatory text to HTML template.
