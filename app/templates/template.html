@@ -27,11 +27,12 @@
           <a class="nav-item nav-link" style="font-size: 125%; color: #184A45FF" href="/">Global Data</a>
           <a class="nav-item nav-link" style="font-size: 125%; color: #184A45FF"href="/simulation">Simulation</a>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 125%; color: #184A45FF">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 125%; color: #184A45FF">
               Maps
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <a class="dropdown-item" href="/usmap">United States</a>
+              <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="/worldmap">The World</a>
             </div>
           </li>
@@ -48,7 +49,7 @@
     {% endblock %}
   </body>
   <hr>
-  <div id="footer">
+  <div id="footer" style=" margin-left: 30px;">
       2020 &copy; Team MarshmallowFlush: Elizabeth Doss, Kiran Vuksanaj, Amanda Chen, Lauren Pehlivanian
   </div>
   <br>
