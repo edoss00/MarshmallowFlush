@@ -1,8 +1,8 @@
 {% extends "template.html" %}
   {% block header %}
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script> -->
   {% endblock %}
   {% block body %}
     <!-- <h1>Confirmed Coronavirus Cases: {{ total }}</h1> -->
@@ -52,5 +52,5 @@
     </script>
     <script src="{{ url_for('static', filename='js/linegraph.js')}}"></script>
     <script id="counter-script" type="text/javascript" src="../static/js/counter.js" count="{{total}}">  </script>
-    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+    <!-- <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script> -->
   {% endblock %}
