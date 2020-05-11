@@ -79,6 +79,23 @@ def get_globalCases():
     # print(global_cases[0:10])
     return global_cases
 
+#returns list of most new country cases
+def get_newCountryCases():
+    world_data = get_globalCases()
+    # print(world_data)
+    data = []
+    for country in world_data:
+        # print(country[0])
+        name = country[0]
+        # print(country[-1]["deaths"])
+        deaths = country[-1]["deaths"] - country[-2]["deaths"]
+        data.append({"country":name, "deaths":deaths})
+
+
+    return data
+
+# print(get_newCountryCase())
+
 #returns dictionary containing different state counts (new confirmed, total confirmed, total deaths, etc.)
 #format: [[date,statename,newcases,newdeaths]]
 def get_globalCountData():
@@ -124,6 +141,7 @@ def get_StatesData():
 
 # print(get_StatesData())
 
+#returns new cases by us county
 def get_CountiesData():
     out = [] #array of arrays
     data = []
@@ -155,16 +173,24 @@ def get_CountiesData():
     #print(out)
     return out
 
-print(get_CountiesData())
+# print(get_CountiesData())
 
+ #returns states-albers-10m.json as a variable
 def get_statesjson():
     with open("static/json/states-albers-10m.json") as jsonfile:
         data = json.loads(jsonfile.read())
         return data
 
+#returns counties-albers-10m.json as a variable
 def get_countiesjson():
     with open("static/json/counties-albers-10m.json") as jsonfile:
         data = json.loads(jsonfile.read())
         return data
 
 # get_statesjson()
+
+#returns countries-50m.json as a variable
+def get_worldjson():
+    with open("static/json/countries-50m.json") as jsonfile:
+        data = json.loads(jsonfile.read())
+        return data

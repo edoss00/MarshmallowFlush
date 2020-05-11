@@ -9,11 +9,15 @@
   <!-- <button id="state">Show Bubble</button> -->
   <h1>New Deaths in the US</h1>
   <div id="statemap"></div>
+  <h1>New Deaths in the World</h1>
   <div id="worldmap"></div>
   <script src="https://unpkg.com/topojson-client@3"></script>
   <script type="text/javascript">
-    var graphdata = {{ counties|tojson }}
+    var stategraphdata = {{ counties|tojson }}
     var us = {{ countyjson|tojson }}
+    var worldgraphdata = {{ world|tojson }}
+    var world = {{ worldjson|tojson }}
   </script>
   <script src="{{ url_for('static', filename='js/maps.js')}}"></script>
+  <script src="http://d3js.org/d3.v5.min.js"></script>
 {% endblock %}
