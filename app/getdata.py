@@ -8,7 +8,7 @@ def get_countries():
     c = []
     for country in world_data:
         c.append(country[0])
-    return c
+    return sorted(c,key=None)
 
 #returns all the data by country requested
 def get_countryCase(c):
@@ -194,3 +194,5 @@ def get_worldjson():
     with open("static/json/countries-50m.json") as jsonfile:
         data = json.loads(jsonfile.read())
         return data
+
+# print(sorted(get_countries(),key=None))
