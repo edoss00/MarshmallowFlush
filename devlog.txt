@@ -27,16 +27,13 @@ Design Doc Changes:
   - Clarified use of API in site components
 
 Timeline:
-  - We requested to have the due date on May 11th, so we are on track and don't need to make major
-changes to our plan of action. Everyone will be able to start coding today. Once data processing is
-handled we will be able to implement D3 and start frontend design. Our simulation is more isolated
-so it can be developed at its own pace.
+  - We requested to have the due date on May 11th, so we are on track and don't need to make major changes to our plan of action. Everyone will be able to start coding today. Once data processing is handled we will be able to implement D3 and start frontend design. Our simulation is more isolated so it can be developed at its own pace.
 
 elizabethD -- 2020-04-30 15:04
 Added requirements and team flag
 
 laurenP -- 2020-05-01 08:18
-Added code in __init__.py to fetch data from 2 APIs. Downloaded csv file containing US case data by state.
+Added code in __init__.py to fetch data from 2 APIs. Downloaded csv file containing US case data by state.marsh
 
 elizabethD -- 2020-05-03 20:18
 Created d3 branch and added starter line graph code
@@ -59,14 +56,35 @@ Finished code for line graph. Added buttons to test if the line graph works. Lin
 elizabethD -- 2020-05-06 00:28
 Tested and highlighted errors, connected flask to html pages
 
+laurenP -- 2020-05-06 08:21
+Made json request code compatible with Python 3.
+
+laurenP -- 2020-05-06 16:56
+Added template html page, added script/stylesheet code and connected it to other existing pages.
+
 amandaC -- 2020-05-06 23:54
 Connected line graph javascript to html and flask app. Added new functions to count global cases, country data, and country list. Changed homepage to show total coronavirus cases. Added function to change countries for line graph.
 
-amandaC - -2020-05-07 00:30:58
+laurenP -- 2020-05-07 08:17
+Created website logo in WordArt, imported and added to template. Fixed bug in accessing states csv file.
+
+amandaC -- 2020-05-07 20:58
 Fixed small bug when loading line graph data from all countries
 
 kiranV -- 2020-05-07 07:36
 Built ‘infection’ aspect of simulation so that infection spreads from human to human. So far unoptimized but successfully selecting ‘neighbor’ humans; experimented with values to find reasonable default spread speed.
+
+laurenP -- 2020-05-08 09:08
+Added Navbar with image to template html file. Added global counter to homepage with toggling numbers to count up. Cleaned up titles on homepage.
+
+amandaC -- 2020-05-09 10:40
+Started the state bubble map and world color map by reading the sample code and the QAF post about making maps. Added coronavirus data to sample code.
+
+laurenP -- 2020-05-10 00:40
+Added Bootstrap radio buttons to select line graph display (confirmed, deaths, recovered). Improved frontend of global counter and form to select data display on homepage. Spent a long time trying to implement code on line graphs to show data points on mouse-over, but it didn’t work. Moved python data functions to separate file.
+
+laurenP -- 2020-05-10 10:33
+Found color scheme for website, changed text, background, navbar, and d3 elements to match theme. Changed formatting of counter to look cleaner. Removed background of logo image.
 
 elizabethD -- 2020-05-10 13:55
 Fixed launch instructions, updated design doc
@@ -74,3 +92,15 @@ Fixed launch instructions, updated design doc
 Design Doc Updates:
 - Removed coronainfo page from site map
 - Updated capabilities of line graph and simulation
+
+amandaC -- 2020-05-10 20:34
+Finished state bubble map and decided to change csv to include county data instead of state data to make it look better. Added a small legend for bubble size (the make uses a square root scale).
+
+amandaC -- 2020-05-10 22:22
+Finished the world color map and added it to the page. Hovering over a country will give the new number of deaths.
+
+laurenP -- 23:35
+Separated world and US map to 2 different paths, adjusted javascript and html files. Added dropdown menu to navbar for maps. Fixed bug in dropdown.
+
+amandaC -- 2020-05-11 00:44
+Fixed scale of world map so colors are more distinguishable. Added margins to most elements. Added a legend to the world map. Alphabetized dropdown menu on home page.
