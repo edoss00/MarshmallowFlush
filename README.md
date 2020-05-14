@@ -17,6 +17,9 @@
   - Create interactive COVID-19 simulation using svg/canvas
   - Javascript
 
+## Video Demo
+[video demo here](https://youtu.be/XHs1tvBG3IQ)
+
 ## Description
 Our project is a site that models changing COVID-19 data. Users will be able to compare trends of Coronavirus statistics between different countries and different US states. Users will also be able to see the effects of social distancing and quarantine on the spread of the virus.
 
